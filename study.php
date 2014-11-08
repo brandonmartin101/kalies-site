@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <link rel="shortcut icon" href="img/favicon.ico">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
@@ -59,9 +59,9 @@
           <p>
             Kalie offers weekly 30, 45, or 60 minute voice lessons, depending on the level and needs of each student.  Her lessons focus on improving technique through vocal exercises, assigned repertoire, and goal setting.  She understands that each student is unique.  Because of this, each lesson is catered towards that specific student's needs.  They will be coached in technique, language diction, and stage presence/character development.
 <br /><br />
-            Practice is an essential role towards improvement while taking lessons.  Kalie sets high expectations for each of her students, challenging them to learn about themselves and their voice.  Lessons are a partnership set between a teacher and a student.  As Kalie works to improve the voice of the student by giving them the proper tools, she expects each student to be invested in their learning through practicing.  Now this may sound dauntingly serious, but spending time rehearsing and preparing for each lesson is just like learning any skill.  The only way to improve is to try, fail, and then try again until you reach an understanding of a concept. 
+            Practice is an essential role towards improvement while taking lessons.  Kalie sets high expectations for each of her students, challenging them to learn about themselves and their voice.  Lessons are a partnership set between a teacher and a student.  As Kalie works to improve the voice of the student by giving them the proper tools, she expects each student to be invested in their learning through practicing.  Now this may sound dauntingly serious, but spending time rehearsing and preparing for each lesson is just like learning any skill.  The only way to improve is to try, fail, and then try again until you reach an understanding of a concept.
 <br /><br />
-            Kalie works to make the learning process more simple, fun, and effective for each student.  To learn more about her and what she can offer you, please contact her by filling out the left-most messaging form. 
+            Kalie works to make the learning process more simple, fun, and effective for each student.  To learn more about her and what she can offer you, please contact her by filling out the left-most messaging form.
           </p>
           <h3>
             Lesson Contracts
