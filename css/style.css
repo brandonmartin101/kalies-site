@@ -116,3 +116,8 @@ p, label {
 blockquote {
   margin-top:15px;
 }
+
+#recaptcha_area, #recaptcha_table {
+  position: relative;
+  right: 10px;
+}

@@ -1,3 +1,49 @@
+<?php
+  // check if the form was posted
+  if($_POST['submit']) {
+
+    // verify CAPTCHA form
+    require_once('recaptchalib.php');
+    $privatekey = "6LdcY_0SAAAAAJgcrpdw2LSSM9q0hhESqmZc00KF";
+    $resp = recaptcha_check_answer ($privatekey,
+                                    $_SERVER["REMOTE_ADDR"],
+                                    $_POST["recaptcha_challenge_field"],
+                                    $_POST["recaptcha_response_field"]);
+
+    if (!$resp->is_valid) {
+      // What happens when the CAPTCHA was entered incorrectly
+      $message = "<p id='send-message'>The reCAPTCHA wasn't entered correctly. Go back and try it again.</p>";
+      // die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
+      //    "(reCAPTCHA said: " . $resp->error . ")");
+    } else {
+      // successful verification
+
+      // pull the form values
+      $emailTo = "kaliemartinvoicestudio@gmail.com";
+      $subject = "Prospective Student: ".$_POST["firstName"]." ".$_POST["lastName"]." ".date('l jS \of F Y h:i:s A');
+      //populate message body
+      $body = $_POST["firstName"]." ".$_POST["lastName"]." has asked to be contacted about lessons.
+Email address: ".$_POST["emailAddress"]."
+Phone number: ".$_POST["phoneNumber"]."
+Preferred contact method: ".$_POST["preferContact"]."
+Voice type: ".$_POST["voiceType"]."
+Questions: ".$_POST["questions"];
+      $headers = "from: prospectivestudent@kaliemartinvoicestudio.com";
+
+      // check if the email sent correctly.
+      if (mail($emailTo, $subject, $body, $headers)) {
+        $message = "<p id='send-message'>The email sent successfully to me. I'll get in touch with you soon!</p>";
+      } else {
+        $message = "<p id='send-message'>Mail not sent for some reason. Try again?</p>";
+      }
+    }
+  } else {
+    // form hasn't been submitted
+    $message = "<p>Fill out the form below to get in touch with Kalie.</p>";
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +64,13 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <!-- script to customize reCAPTCHA -->
+  <script type="text/javascript">
+  var RecaptchaOptions = {
+    theme : 'white'
+  };
+ </script>
 
 </head>
 
@@ -71,35 +124,7 @@
           </p>
         </div>
         <div class="col-md-4 column">
-          <p id="send-message">
-            <?php
-              // check if the form was posted
-              if($_POST['submit']) {
-                // pull the form values
-                $emailTo = "kaliemartinvoicestudio@gmail.com";
-                $subject = "Prospective Student: ".$_POST["firstName"]." ".$_POST["lastName"]." ".date('l jS \of F Y h:i:s A');
-                //populate message body
-                $body = $_POST["firstName"]." ".$_POST["lastName"]." has asked to be contacted about lessons.
-Email address: ".$_POST["emailAddress"]."
-Phone number: ".$_POST["phoneNumber"]."
-Preferred contact method: ".$_POST["preferContact"]."
-Voice type: ".$_POST["voiceType"]."
-Questions: ".$_POST["questions"];
-                $headers = "from: prospectivestudent@kaliemartinvoicestudio.com";
-
-                // check if the form was filled out correctly.
-                if (mail($emailTo, $subject, $body, $headers)) {
-                  echo "The email sent successfully to me. I'll get in touch with you soon!";
-                } else {
-                  echo "Mail not sent for some reason. Try again?";
-                }
-              } else {
-                // print value of form hasn't been submitted
-                echo "Fill out the form below to get in touch with Kalie.";
-              }
-
-            ?>
-          </p>
+          <?php echo $message; ?>
           <form role="form" method="post">
             <div class="form-group">
               <label for="firstName">First name:</label><input type="text" class="form-control" id="firstName" name="firstName" />
@@ -121,7 +146,15 @@ Questions: ".$_POST["questions"];
               </p>
               <label for="questions">Questions for me?  Tell me what you are looking for in a voice teacher.</label>
               <textarea rows='3' class="form-control" name="questions"></textarea><br />
-              <button type="submit" name="submit" value="Send email" class="btn btn-default">Send email</button>
+              <label for="captchaDisplay">I know it's a pain, but please fill out this CAPTCHA form. It helps protect us from evil internet robots.</label>
+              <?php
+                //code to insert reCAPTCHA form at the end of the report
+                require_once('recaptchalib.php');
+                $publickey = "6LdcY_0SAAAAAItgUyVoZIDWpJRaYzHA2pTpFB1l";
+                echo recaptcha_get_html($publickey);
+              ?>
+              <br />
+              <button type="submit" name="submit" value="Send email" class="btn btn-primary">Send email</button>
             </div>
           </form>
         </div>
@@ -146,4 +179,15 @@ Questions: ".$_POST["questions"];
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- Site-specific JS scripts -->
 <script type="text/javascript" src="js/scripts.js"></script>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56556001-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </html>
