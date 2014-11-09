@@ -28,7 +28,7 @@ h1 {
 
 .carousel {
   margin: 0px 0px 10px 0px;
-  border:1px solid black;
+  border:1px solid darkcyan;
 }
 
 p, label {
@@ -58,7 +58,7 @@ p, label {
   right:0;
   width:60px;
   position:fixed;
-  top:100px;
+  top:50px;
   background-repeat:no-repeat;
   z-index:10;
 }
